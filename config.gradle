@@ -1,0 +1,32 @@
+ext {
+    version = [
+            'version':'1.0.0',
+            'mybatisplus':'3.5.3.1',
+            'lombok':'1.18.26',
+            'jjwt': '0.11.5',
+            'springPluginCore':'3.0.0',
+            'minio':"8.5.4",
+            'commonsIo': '2.12.0',
+            'redisson': '3.23.0',
+            'hutool':'5.8.20',
+            'guava':'32.0.0-jre',
+            'knife4j': '4.1.0',
+            'okhttp': '4.10.0'
+    ]
+
+    dependencies = [
+            'lombok':"org.projectlombok:lombok:${version.lombok}",
+            'mybatis-plus-boot-starter':"com.baomidou:mybatis-plus-boot-starter:${version.mybatisplus}",
+            'jjwt-api': "io.jsonwebtoken:jjwt-api:${version.jjwt}",
+            "jjwt-impl": "io.jsonwebtoken:jjwt-impl:${version.jjwt}",
+            "jjwt-jackson": "io.jsonwebtoken:jjwt-jackson:${version.jjwt}",
+            "spring-plugin-core": "org.springframework.plugin:spring-plugin-core:${version.springPluginCore}",
+            "minio":"io.minio:minio:${version.minio}",
+            "commons-io":"commons-io:commons-io:${version.commonsIo}",
+            "redisson-spring-boot-starter" : "org.redisson:redisson-spring-boot-starter:${version.redisson}",
+            "hutool": "cn.hutool:hutool-all:${version.hutool}",
+            "guava": "com.google.guava:guava:${version.guava}",
+            "knife4j": "com.github.xiaoymin:knife4j-openapi3-jakarta-spring-boot-starter:${version.knife4j}",
+            "okhttp": "com.squareup.okhttp3:okhttp:${version.okhttp}"
+    ]
+}

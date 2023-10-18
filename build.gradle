@@ -1,0 +1,77 @@
+plugins {
+    id 'java'
+    //Spring开发了一个类似Maven的依赖关系管理功能的Gradle插件
+    id 'io.spring.dependency-management' version '1.1.0' apply false
+    //springboot
+    id 'org.springframework.boot' version '3.1.0' apply false
+}
+
+//全局版本
+apply from: "config.gradle"
+
+group 'com.dly.blog'
+version "${rootProject.ext.version.version}"
+
+repositories {
+    mavenCentral()
+}
+
+subprojects {
+    //控制spring版本
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'org.springframework.boot'
+
+    /*必须配合lombok使用*/
+    apply plugin: "java-library"
+    apply plugin: "jacoco"
+
+    group 'com.dly.blog'
+    version "${rootProject.ext.version.version}"
+
+    javadoc.options.encoding("UTF-8")
+    compileJava.options.encoding("UTF-8")
+    compileTestJava.options.encoding("UTF-8")
+
+    dependencies {
+        compileOnly "org.projectlombok:lombok"
+        annotationProcessor "org.projectlombok:lombok"
+
+        implementation 'cn.hutool:hutool-all'
+        implementation 'com.github.xiaoymin:knife4j-openapi3-jakarta-spring-boot-starter'
+    }
+
+    // dependencyManagement版本统一管理， 类似于父maven的dependencyManagement
+    dependencyManagement {
+        dependencies {
+        //dependency "com.baomidou:mybatis-plus-boot-starter:${MybatisBlusVersion}"
+            for(depJar in rootProject.ext.dependencies){
+                dependency depJar.value
+            }
+        }
+
+        imports {
+            mavenBom("org.springframework.cloud:spring-cloud-dependencies:2022.0.4")
+            mavenBom("com.alibaba.cloud:spring-cloud-alibaba-dependencies:2022.0.0.0")
+        }
+
+
+    }
+
+    //约束java版本
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(17))
+        }
+    }
+
+    //约束编码格式
+    javadoc {
+        // <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        // 防止本地打开中文乱码
+        options.addStringOption("charset", "UTF-8")
+    }
+}
+
+test {
+    useJUnitPlatform()
+}

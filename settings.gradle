@@ -1,0 +1,5 @@
+rootProject.name = 'cloud-blog'
+include 'blog-gateway'
+include 'blog-common'
+include 'blog-auth'
+
